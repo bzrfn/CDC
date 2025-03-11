@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping - Destacados</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Tienda de Carros y Accesorios</h1>
+    <nav>
+      <ul>
+        <li><a href="shopping.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="#" id="logout">Cerrar Sesión</a></li>
+        <li>
+          <a href="#" id="cartLink">
+            <img src="images/carrito.png" alt="Carrito" class="cart-icon">
+            <span id="cartCount" class="cart-count">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="destacados">
+      <h2>Productos Destacados</h2>
+      <div class="featured-container">
+        <!-- Aquí se cargan automáticamente los productos destacados -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal del carrito -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Carrito de Compras</h2>
+      <div class="cart-container">
+        <!-- Items del carrito se insertan aquí -->
+      </div>
+      <button id="purchaseBtn">Realizar Compra</button>
+    </div>
+  </div>
+
+  <script src="js/cart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      loadProducts();
+      displayFeatured();
+      displayCart();
+      updateCartCount();
+
+      // Evento cerrar sesión
+      const logoutLink = document.getElementById("logout");
+      logoutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = "index.html";
+      });
+
+      // Eventos del modal carrito
+      const modal = document.getElementById("cartModal");
+      const cartLink = document.getElementById("cartLink");
+      const closeBtn = document.querySelector(".modal-content .close");
+
+      cartLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        modal.style.display = "block";
+        displayCart();
+      });
+
+      closeBtn.addEventListener("click", () => modal.style.display = "none");
+      window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+
+      // Botón compra funcional
+      document.getElementById("purchaseBtn").addEventListener('click', () => {
+        if (cart.length > 0) {
+          alert("¡Compra realizada con éxito!");
+          cart = [];
+          displayCart();
+          updateCartCount();
+        } else {
+          alert("Tu carrito está vacío.");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

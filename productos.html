@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Productos</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Tienda de Carros y Accesorios</h1>
+    <nav>
+      <ul>
+        <li><a href="shopping.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#" id="productsDropdown">Productos &#9776;</a>
+          <div class="dropdown-content">
+            <a href="#" id="cochesLink">Coches</a>
+            <a href="#" id="accesoriosLink">Accesorios</a>
+          </div>
+        </li>
+        <li>
+          <a href="#" id="cartLink">
+            <img src="ruta-de-la-imagen-carrito.png" alt="Carrito" class="cart-icon">
+            <span id="cartCount" class="cart-count">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section id="categoria">
+      <h2 id="categoryTitle">Coches</h2>
+      <div class="products-container"></div>
+    </section>
+  </main>
+
+  <!-- Modal del carrito -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Carrito de Compras</h2>
+      <div class="cart-container"></div>
+      <button id="purchaseBtn">Realizar Compra</button>
+    </div>
+  </div>
+
+  <script src="js/cart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      loadProducts();
+      displayProductsCategory();
+      displayCart();
+      updateCartCount();
+
+      const dropdown = document.querySelector(".dropdown-content");
+      document.getElementById("productsDropdown").onclick = e => {
+        e.preventDefault();
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      };
+
+      document.getElementById("cochesLink").onclick = e => {
+        e.preventDefault();
+        currentCategory = "coches";
+        displayProductsCategory();
+        dropdown.style.display = "none";
+      };
+
+      document.getElementById("accesoriosLink").onclick = e => {
+        e.preventDefault();
+        currentCategory = "accesorios";
+        displayProductsCategory();
+        dropdown.style.display = "none";
+      };
+
+      const modal = document.getElementById("cartModal");
+      document.getElementById("cartLink").onclick = e => {
+        e.preventDefault();
+        modal.style.display = "block";
+        displayCart();
+      };
+      document.querySelector(".modal-content .close").onclick = () => modal.style.display = "none";
+      window.onclick = e => { if (e.target == modal) modal.style.display = "none"; };
+
+      document.getElementById("purchaseBtn").onclick = () => {
+        if (cart.length > 0) {
+          alert("¡Compra realizada con éxito!");
+          cart = [];
+          displayCart();
+          updateCartCount();
+        } else {
+          alert("Tu carrito está vacío.");
+        }
+      };
+    });
+  </script>
+</body>
+</html>
