@@ -1,4 +1,4 @@
-/* TipografÃ­a y variables de color */
+/* Tipografía y variables de color */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 :root {
@@ -23,7 +23,7 @@ body {
   line-height: 1.6;
 }
 
-/* Encabezado y navegaciÃ³n */
+/* Encabezado y navegación */
 header {
   background: var(--header-bg-gradient);
   padding: 20px 0;
@@ -54,15 +54,13 @@ nav ul li a {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
-  display: inline-block;
-  position: relative;
   padding: 5px 15px;
 }
 nav ul li a:hover {
   color: var(--accent-color);
 }
 
-/* Dropdown (menÃº hamburguesa para Productos) */
+/* Dropdown */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -72,16 +70,13 @@ nav ul li a:hover {
   min-width: 150px;
   border-radius: 3px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  z-index: 10;
 }
 .dropdown-content a {
   display: block;
   padding: 10px;
   color: #fff;
   text-decoration: none;
-  transition: background 0.3s ease, color 0.3s ease;
 }
-/* Cambio aquÃ­: al hacer hover, se cambia el color de fondo y el color del texto para mayor legibilidad */
 .dropdown-content a:hover {
   background: var(--accent-color);
   color: var(--primary-color);
@@ -94,78 +89,14 @@ nav ul li a:hover {
   padding: 0 20px;
 }
 
-/* Formularios (login y registro) */
-.login-container, .register-container {
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 30px;
-  width: 100%;
-  max-width: 400px;
-  margin: 60px auto;
-  text-align: center;
-}
-.login-container h2, .register-container h2 {
-  margin-bottom: 20px;
-  color: var(--primary-color);
-}
-.login-container form label, .register-container form label {
-  margin: 10px 0 5px;
-  font-weight: 500;
-  text-align: left;
-}
-.login-container form input, .register-container form input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  width: 100%;
-  margin-bottom: 10px;
-}
-.login-container form button, .register-container form button {
-  background: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 10px;
-}
-.login-container form button:hover, .register-container form button:hover {
-  background: var(--accent-color);
-}
-.login-img {
-  width: 120px;
-  display: block;
-  margin: 0 auto 20px;
-}
-
-/* Secciones (Destacados y Productos) */
-section {
-  padding: 30px 0;
-}
-section h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  color: var(--primary-color);
-}
-.featured-container,
-.products-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
-  padding: 0 20px;
-}
-
 /* Tarjetas de Producto */
 .product {
   background: #fff;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
   position: relative;
+  transition: transform 0.3s ease;
 }
 .product:hover {
   transform: translateY(-5px);
@@ -180,11 +111,6 @@ section h2 {
   font-size: 1.1rem;
   color: var(--primary-color);
 }
-.product p {
-  padding: 0 10px 10px;
-  font-size: 0.95rem;
-  color: #555;
-}
 .product button {
   background: var(--accent-color);
   border: none;
@@ -194,23 +120,9 @@ section h2 {
   margin: 0 10px 10px;
   border-radius: 3px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 .product button:hover {
   background: var(--primary-color);
-}
-/* Estrella para destacar */
-.product .star {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  color: var(--accent-color);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.product .star:hover {
-  transform: scale(1.2);
 }
 
 /* Modal del carrito */
@@ -242,81 +154,24 @@ section h2 {
   color: var(--primary-color);
 }
 
-/* Carrito de Compras */
-.cart-container {
-  max-height: 300px;
-  overflow-y: auto;
-  margin-bottom: 15px;
-}
-.cart-item {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-}
-.cart-item img {
-  width: 60px;
-  height: 40px;
-  object-fit: cover;
-  margin-right: 15px;
-  border-radius: 3px;
-}
-.cart-item .item-info {
-  flex-grow: 1;
-}
-.cart-item button {
-  background: #e63946;
-  border: none;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-.cart-item button:hover {
-  background: #d62828;
-}
-#purchaseBtn {
-  background: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 3px;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
-  transition: background 0.3s ease;
-}
-#purchaseBtn:hover {
-  background: var(--accent-color);
+/* 🛒 Mensaje de confirmación al agregar al carrito */
+.cart-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Icono y contador (badge) del carrito */
-.cart-icon {
-  width: 30px;
-  vertical-align: middle;
-  position: relative;
-}
-.cart-count {
-  background: var(--accent-color);
-  color: #fff;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 0.8rem;
-  position: absolute;
-  top: -5px;
-  right: -5px;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 1.8rem;
-  }
-  nav ul li {
-    margin: 0 8px;
-  }
-  .product img {
-    height: 140px;
-  }
+.cart-message.show {
+  opacity: 1;
+  visibility: visible;
 }
