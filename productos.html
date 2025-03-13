@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <title>Productos</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos para el mensaje de agregado al carrito */
+    #cartMessage {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      display: none;
+      font-weight: bold;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -34,6 +49,9 @@
       <div class="products-container"></div>
     </section>
   </main>
+
+  <!-- Mensaje de agregado al carrito -->
+  <div id="cartMessage">¡Producto agregado al carrito!</div>
 
   <!-- Modal del carrito -->
   <div id="cartModal" class="modal">
@@ -93,6 +111,15 @@
         }
       };
     });
+
+    // Función para mostrar mensaje de agregado al carrito
+    function showCartMessage() {
+      const message = document.getElementById("cartMessage");
+      message.style.display = "block";
+      setTimeout(() => {
+        message.style.display = "none";
+      }, 2000); // Se oculta en 2 segundos
+    }
   </script>
 </body>
 </html>
