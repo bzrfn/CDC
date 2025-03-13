@@ -6,10 +6,7 @@ let coches = [
   { id: 4, name: "Chevrolet Camaro", price: 23000, image: "images/chevrolet-camaro.jpg", isFeatured: true },
   { id: 5, name: "BMW 3 Series", price: 24000, image: "images/bmw-3series.jpg", isFeatured: true },
   { id: 6, name: "Audi A4", price: 25000, image: "images/audi-a4.jpg", isFeatured: false },
-  { id: 7, name: "Mercedes-Benz C-Class", price: 26000, image: "images/mercedes-cclass.jpg", isFeatured: false },
-  { id: 8, name: "Volkswagen Golf", price: 27000, image: "images/vw-golf.jpg", isFeatured: false },
-  { id: 9, name: "Nissan Altima", price: 28000, image: "images/nissan-altima.jpg", isFeatured: false },
-  { id: 10, name: "Kia Optima", price: 29000, image: "images/kia-optima.jpg", isFeatured: false }
+  { id: 7, name: "Mercedes-Benz C-Class", price: 26000, image: "images/mercedes-cclass.jpg", isFeatured: false }
 ];
 
 let accesorios = [
@@ -17,12 +14,7 @@ let accesorios = [
   { id: 102, name: "Tapicería de Cuero", price: 250, image: "images/tapiceria-cuero.jpg", isFeatured: true },
   { id: 103, name: "Sistema de Navegación", price: 300, image: "images/sistema-navegacion.jpg", isFeatured: true },
   { id: 104, name: "Cámara de Reversa", price: 350, image: "images/camara-reversa.jpg", isFeatured: true },
-  { id: 105, name: "Faros LED", price: 400, image: "images/faros-led.jpg", isFeatured: true },
-  { id: 106, name: "Parachoques Deportivo", price: 450, image: "images/parachoques-deportivo.jpg", isFeatured: false },
-  { id: 107, name: "Suspensión Deportiva", price: 500, image: "images/suspension-deportiva.jpg", isFeatured: false },
-  { id: 108, name: "Alerón Trasero", price: 550, image: "images/aleron-trasero.jpg", isFeatured: false },
-  { id: 109, name: "Kit de Carrocería", price: 600, image: "images/kit-carroceria.jpg", isFeatured: false },
-  { id: 110, name: "Sistema de Audio Premium", price: 650, image: "images/sistema-audio.jpg", isFeatured: false }
+  { id: 105, name: "Faros LED", price: 400, image: "images/faros-led.jpg", isFeatured: true }
 ];
 
 let currentCategory = "coches";
@@ -80,15 +72,12 @@ function displayFeatured() {
   featuredProducts.forEach(product => {
     const productDiv = document.createElement('div');
     productDiv.classList.add('product');
-    const starIcon = product.isFeatured ? "★" : "☆";
-    const category = product.id <= 100 ? "coches" : "accesorios";
 
     productDiv.innerHTML = `
       <img src="${product.image}" alt="${product.name}">
       <h3>${product.name}</h3>
       <p>Precio: $${product.price}</p>
-      <button onclick="addToCart(${product.id}, '${category}')">Agregar al Carrito</button>
-      <span class="star" onclick="toggleFeatured(${product.id}, '${category}')">${starIcon}</span>
+      <button onclick="addToCart(${product.id}, '${product.id < 100 ? 'coches' : 'accesorios'}')">Agregar al Carrito</button>
     `;
     featuredContainer.appendChild(productDiv);
   });
@@ -109,7 +98,8 @@ function addToCart(productId, category) {
   if (product) {
     cart.push(product);
     displayCart();
-    showCartMessage(product.name);  // 🟢 Agrega mensaje visual al carrito
+    updateCartCount();
+    showCartMessage(product.name);
   }
 }
 
@@ -145,15 +135,31 @@ function showCartMessage(productName) {
   const message = document.createElement("div");
   message.classList.add("cart-message");
   message.textContent = `🛒 ${productName} agregado al carrito`;
-  
+
   document.body.appendChild(message);
   setTimeout(() => { message.remove(); }, 2000);
 }
 
+// 🛒 Simulación de compra desde productos y shopping
 document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
-  if(document.querySelector('.products-container')) displayProductsCategory();
-  if(document.querySelector('.featured-container')) displayFeatured();
+  if (document.querySelector('.products-container')) displayProductsCategory();
+  if (document.querySelector('.featured-container')) displayFeatured();
   displayCart();
   updateCartCount();
+
+  // Botón de compra funcional
+  const purchaseButton = document.getElementById("purchaseBtn");
+  if (purchaseButton) {
+    purchaseButton.addEventListener("click", () => {
+      if (cart.length > 0) {
+        alert("✅ ¡Compra realizada con éxito!");
+        cart = [];
+        displayCart();
+        updateCartCount();
+      } else {
+        alert("⚠ Tu carrito está vacío.");
+      }
+    });
+  }
 });
