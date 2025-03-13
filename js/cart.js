@@ -109,6 +109,7 @@ function addToCart(productId, category) {
   if (product) {
     cart.push(product);
     displayCart();
+    showCartMessage(product.name);  // 🟢 Agrega mensaje visual al carrito
   }
 }
 
@@ -137,6 +138,16 @@ function displayCart() {
 function updateCartCount() {
   const countElement = document.getElementById('cartCount');
   if (countElement) countElement.textContent = cart.length;
+}
+
+// 🟢 Mensaje visual de "Producto agregado al carrito"
+function showCartMessage(productName) {
+  const message = document.createElement("div");
+  message.classList.add("cart-message");
+  message.textContent = `🛒 ${productName} agregado al carrito`;
+  
+  document.body.appendChild(message);
+  setTimeout(() => { message.remove(); }, 2000);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
