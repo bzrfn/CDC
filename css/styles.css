@@ -28,7 +28,7 @@ body {
 /* ENCABEZADO Y NAVEGACIÓN */
 header {
   background: var(--header-bg-gradient);
-  padding: 20px 0;
+  padding: 15px 0;
   color: #fff;
   text-align: center;
   position: sticky;
@@ -38,8 +38,7 @@ header {
 }
 
 header h1 {
-  font-size: 2rem;
-  margin-bottom: 5px;
+  font-size: 1.8rem;
 }
 
 nav ul {
@@ -67,7 +66,7 @@ nav ul li a:hover {
   color: var(--accent-color);
 }
 
-/* DROPDOWN MENU */
+/* MENÚ DESPLEGABLE */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -92,60 +91,13 @@ nav ul li a:hover {
   color: var(--primary-color);
 }
 
-/* CONTENEDORES GENERALES */
+/* SECCIONES GENERALES */
 .container {
   max-width: 1100px;
   margin: 30px auto;
   padding: 0 20px;
 }
 
-/* FORMULARIOS (Login y Registro) */
-.login-container, .register-container {
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 100%;
-  max-width: 400px;
-  margin: 60px auto;
-  text-align: center;
-}
-
-.login-container h2, .register-container h2 {
-  margin-bottom: 20px;
-  color: var(--primary-color);
-}
-
-.login-container form label, .register-container form label {
-  display: block;
-  margin: 10px 0 5px;
-  font-weight: 500;
-  text-align: left;
-}
-
-.login-container form input, .register-container form input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.login-container form button, .register-container form button {
-  background: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.login-container form button:hover, .register-container form button:hover {
-  background: var(--accent-color);
-}
-
-/* SECCIONES (Destacados y Productos) */
 section {
   padding: 30px 0;
 }
@@ -159,7 +111,7 @@ section h2 {
 
 .featured-container, .products-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   padding: 0 20px;
 }
@@ -167,11 +119,13 @@ section h2 {
 /* TARJETAS DE PRODUCTO */
 .product {
   background: #fff;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   position: relative;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .product:hover {
@@ -180,19 +134,21 @@ section h2 {
 
 .product img {
   width: 100%;
-  height: 160px;
-  object-fit: cover;
+  max-width: 180px;  /* Evita que las imágenes sean demasiado grandes */
+  height: auto;
+  margin: 10px auto;
+  display: block;
 }
 
 .product h3 {
   padding: 10px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--primary-color);
 }
 
 .product p {
   padding: 0 10px 10px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #555;
 }
 
@@ -203,7 +159,7 @@ section h2 {
   padding: 8px;
   width: calc(100% - 20px);
   margin: 0 10px 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -217,10 +173,9 @@ section h2 {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--accent-color);
   cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
 .product .star:hover {
@@ -245,14 +200,14 @@ section h2 {
   margin: 10% auto;
   padding: 20px;
   width: 90%;
-  max-width: 600px;
+  max-width: 500px;
   position: relative;
 }
 
 .modal-content .close {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 10px;
+  right: 15px;
   font-size: 1.8rem;
   cursor: pointer;
   color: var(--primary-color);
@@ -273,9 +228,8 @@ section h2 {
 }
 
 .cart-item img {
-  width: 60px;
-  height: 40px;
-  object-fit: cover;
+  width: 50px;
+  height: auto;
   margin-right: 15px;
   border-radius: 3px;
 }
@@ -297,17 +251,35 @@ section h2 {
   background: #d62828;
 }
 
+/* ICONO Y CONTADOR DEL CARRITO */
+.cart-icon {
+  width: 30px;
+  vertical-align: middle;
+  position: relative;
+}
+
+.cart-count {
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
   header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
-  nav ul li {
-    margin: 0 8px;
+  nav ul {
+    flex-direction: column;
   }
 
   .product img {
-    height: 140px;
+    max-width: 120px;
   }
 }
