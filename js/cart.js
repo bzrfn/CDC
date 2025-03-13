@@ -20,6 +20,7 @@ let accesorios = [
 let currentCategory = "coches";
 let cart = [];
 
+// Cargar productos desde localStorage
 function loadProducts() {
   const cochesStored = localStorage.getItem('coches');
   const accesoriosStored = localStorage.getItem('accesorios');
@@ -31,18 +32,19 @@ function loadProducts() {
   }
 }
 
+// Guardar productos en localStorage
 function saveProducts() {
   localStorage.setItem('coches', JSON.stringify(coches));
   localStorage.setItem('accesorios', JSON.stringify(accesorios));
 }
 
+// Mostrar productos de la categoría seleccionada
 function displayProductsCategory() {
   const productsContainer = document.querySelector('.products-container');
   const categoryTitle = document.getElementById('categoryTitle');
   if (!productsContainer || !categoryTitle) return;
 
   productsContainer.innerHTML = "";
-
   let productsToDisplay = currentCategory === "coches" ? coches : accesorios;
   categoryTitle.textContent = currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
 
@@ -62,6 +64,7 @@ function displayProductsCategory() {
   });
 }
 
+// Mostrar productos destacados
 function displayFeatured() {
   const featuredContainer = document.querySelector('.featured-container');
   if (!featuredContainer) return;
@@ -83,6 +86,7 @@ function displayFeatured() {
   });
 }
 
+// Alternar estado de destacado
 function toggleFeatured(productId, category) {
   const product = (category === "coches" ? coches : accesorios).find(p => p.id === productId);
   if (product) {
@@ -93,6 +97,7 @@ function toggleFeatured(productId, category) {
   }
 }
 
+// Agregar al carrito con mensaje de confirmación
 function addToCart(productId, category) {
   const product = (category === "coches" ? coches : accesorios).find(p => p.id === productId);
   if (product) {
@@ -103,44 +108,56 @@ function addToCart(productId, category) {
   }
 }
 
+// Mensaje de confirmación al agregar al carrito
+function showCartMessage(productName) {
+  let existingMessage = document.querySelector(".cart-message");
+  if (existingMessage) existingMessage.remove();
+
+  let message = document.createElement("div");
+  message.classList.add("cart-message");
+  message.textContent = `🛒 ${productName} agregado al carrito`;
+
+  document.body.appendChild(message);
+
+  setTimeout(() => {
+    message.remove();
+  }, 2000);
+}
+
+// Eliminar producto del carrito
 function removeFromCart(index) {
   cart.splice(index, 1);
   displayCart();
 }
 
+// Mostrar carrito de compras
 function displayCart() {
   const cartContainer = document.querySelector('.cart-container');
   if (!cartContainer) return;
 
-  cartContainer.innerHTML = cart.length ? cart.map((item, index) => `
-    <div class="cart-item">
-      <img src="${item.image}" alt="${item.name}">
-      <div class="item-info">
-        <h4>${item.name}</h4>
-        <p>Precio: $${item.price}</p>
+  cartContainer.innerHTML = cart.length
+    ? cart.map((item, index) => `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}">
+        <div class="item-info">
+          <h4>${item.name}</h4>
+          <p>Precio: $${item.price}</p>
+        </div>
+        <button onclick="removeFromCart(${index})">Eliminar</button>
       </div>
-      <button onclick="removeFromCart(${index})">Eliminar</button>
-    </div>`).join('') : "<p>El carrito está vacío.</p>";
+    `).join('')
+    : "<p>El carrito está vacío.</p>";
 
   updateCartCount();
 }
 
+// Actualizar contador del carrito
 function updateCartCount() {
   const countElement = document.getElementById('cartCount');
   if (countElement) countElement.textContent = cart.length;
 }
 
-// 🟢 Mensaje visual de "Producto agregado al carrito"
-function showCartMessage(productName) {
-  const message = document.createElement("div");
-  message.classList.add("cart-message");
-  message.textContent = `🛒 ${productName} agregado al carrito`;
-
-  document.body.appendChild(message);
-  setTimeout(() => { message.remove(); }, 2000);
-}
-
-// 🛒 Simulación de compra desde productos y shopping
+// Simulación de compra desde productos y shopping
 document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
   if (document.querySelector('.products-container')) displayProductsCategory();
